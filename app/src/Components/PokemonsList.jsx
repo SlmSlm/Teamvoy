@@ -4,23 +4,10 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
-import Table from "react-bootstrap/Table";
+import SelectedPokCard from "./SelectedPokCard/SelectedPokCard";
 
 const PokemonsList = (props) => {
-  const [selectedPokData, setData] = useState({
-    img: `https://www.film.ru/sites/default/files/images/10(186).jpg`,
-    name: "Choose a Pokemon",
-    id: null,
-    types: [],
-    attack: null,
-    defence: null,
-    hp: null,
-    spattack: null,
-    spdefence: null,
-    speed: null,
-    weight: null,
-    totalMoves: null,
-  });
+  const [selectedPokData, setData] = useState({});
 
   const getData = (p) => {
     return (
@@ -38,8 +25,20 @@ const PokemonsList = (props) => {
         weight: p.weight,
         totalMoves: p.moves.length,
       }),
-      selectedPokData
+      selectedPokData,
+      checkState(selectedPokData)
     );
+  };
+
+  const checkState = (state) =>
+    Object.keys(state).length === 0 ? null : (
+      <SelectedPokCard state={selectedPokData} toUpper={toUpper}/>
+    );
+
+  const toUpper = (str) => {
+    if (!str) return str;
+
+    return str[0].toUpperCase() + str.slice(1) + " ";
   };
 
   return (
@@ -57,10 +56,14 @@ const PokemonsList = (props) => {
                       onClick={() => getData(p)}
                     >
                       <Card.Body>
-                        <Card.Img src={p.sprites.front_default} alt="Pokemon" />
-                        <Card.Title>{p.name}</Card.Title>
+                        <Card.Img
+                          src={p.sprites.front_default}
+                          alt="Pokemon"
+                          style={{ width: "150px" }}
+                        />
+                        <Card.Title>{toUpper(p.name)}</Card.Title>
                         {p.types.map((types) => (
-                          <span> {types.type.name} </span>
+                          <span>{toUpper(types.type.name)}</span>
                         ))}
                       </Card.Body>
                     </Card>
@@ -72,58 +75,7 @@ const PokemonsList = (props) => {
               Load more
             </Button>
           </Col>
-          <Col>
-            <Card bg={"dark"}>
-              <Card.Img src={selectedPokData.img} />
-              <Card.Title>
-                {selectedPokData.name} {selectedPokData.id}
-              </Card.Title>
-              <Table striped bordered hover variant="dark">
-                <tbody>
-                  <tr>
-                    <td>Type</td>
-                    <td>
-                      {selectedPokData.types.map((types) => (
-                        <div>{types.type.name}</div>
-                      ))}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Attack</td>
-                    <td>{selectedPokData.attack}</td>
-                  </tr>
-                  <tr>
-                    <td>Defense</td>
-                    <td>{selectedPokData.defence}</td>
-                  </tr>
-                  <tr>
-                    <td>HP</td>
-                    <td>{selectedPokData.hp}</td>
-                  </tr>
-                  <tr>
-                    <td>SP Attack</td>
-                    <td>{selectedPokData.spattack}</td>
-                  </tr>
-                  <tr>
-                    <td>SP Defense</td>
-                    <td>{selectedPokData.spdefence}</td>
-                  </tr>
-                  <tr>
-                    <td>Speed</td>
-                    <td>{selectedPokData.speed}</td>
-                  </tr>
-                  <tr>
-                    <td>Weight</td>
-                    <td>{selectedPokData.weight}</td>
-                  </tr>
-                  <tr>
-                    <td>Total moves</td>
-                    <td>{selectedPokData.totalMoves}</td>
-                  </tr>
-                </tbody>
-              </Table>
-            </Card>
-          </Col>
+          <Col>{checkState(selectedPokData)}</Col>
         </Row>
       </Container>
     </div>
