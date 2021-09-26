@@ -5,6 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import SelectedPokCard from "./SelectedPokCard/SelectedPokCard";
+import preloaderImg from "../Images/preloaderImg.gif";
+import Preloader from "./Preloader/Preloader";
 
 const PokemonsList = (props) => {
   const [selectedPokData, setData] = useState({});
@@ -32,12 +34,11 @@ const PokemonsList = (props) => {
 
   const checkState = (state) =>
     Object.keys(state).length === 0 ? null : (
-      <SelectedPokCard state={selectedPokData} toUpper={toUpper}/>
+      <SelectedPokCard state={selectedPokData} toUpper={toUpper} />
     );
 
   const toUpper = (str) => {
     if (!str) return str;
-
     return str[0].toUpperCase() + str.slice(1) + " ";
   };
 
@@ -46,34 +47,48 @@ const PokemonsList = (props) => {
       <Container>
         <Row>
           <Col>
-            <Row>
-              {props.pokemons.map((p) => {
-                return (
-                  <Col key={p.id} xs={12} sm={6} md={4} lg={4}>
-                    <Card
-                      bg={"dark"}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => getData(p)}
-                    >
-                      <Card.Body>
-                        <Card.Img
-                          src={p.sprites.front_default}
-                          alt="Pokemon"
-                          style={{ width: "150px" }}
-                        />
-                        <Card.Title>{toUpper(p.name)}</Card.Title>
-                        {p.types.map((types) => (
-                          <span>{toUpper(types.type.name)}</span>
-                        ))}
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                );
-              })}
-            </Row>
-            <Button onClick={props.loadMore} style={{ width: "100%" }}>
-              Load more
-            </Button>
+            {props.preloader ? (
+              <Preloader />
+            ) : (
+              <div>
+                <Row>
+                  {props.pokemons.map((p) => {
+                    return (
+                      <Col key={p.id} xs={12} sm={6} md={4} lg={4}>
+                        <Card
+                          bg={"dark"}
+                          style={{ cursor: "pointer" }}
+                          onClick={() => getData(p)}
+                        >
+                          <Card.Body>
+                            {props.preloader ? (
+                              <Card.Img
+                                src={preloaderImg}
+                                alt="Loading..."
+                                style={{ width: "150px" }}
+                              />
+                            ) : (
+                              <Card.Img
+                                src={p.sprites.front_default}
+                                alt="Pokemon"
+                                style={{ width: "150px" }}
+                              />
+                            )}
+                            <Card.Title>{toUpper(p.name)}</Card.Title>
+                            {p.types.map((types) => (
+                              <span>{toUpper(types.type.name)}</span>
+                            ))}
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    );
+                  })}
+                </Row>
+                <Button onClick={props.loadMore} style={{ width: "100%" }}>
+                  Load more
+                </Button>
+              </div>
+            )}
           </Col>
           <Col>{checkState(selectedPokData)}</Col>
         </Row>

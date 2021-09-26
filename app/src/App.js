@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import PokemonsList from "./Components/PokemonsList";
+import Preloader from "./Components/Preloader/Preloader";
 
 function App() {
   function loadMore() {
@@ -12,8 +13,10 @@ function App() {
   let [currentLimit, setLimit] = useState(12);
   const [pokemons, setPokemons] = useState([]);
   const [pokemonsId, setId] = useState([]);
+  const [preloader, togglrePreloader] = useState(false);
 
   const getPokemons = async () => {
+    togglrePreloader(true);
     let array = [];
     await axios
       .get(`https://pokeapi.co/api/v2/pokemon?limit=${currentLimit}`)
@@ -29,6 +32,7 @@ function App() {
               );
             });
         });
+        togglrePreloader(false);
         setLimit((currentLimit += 12));
       });
   };
@@ -42,7 +46,11 @@ function App() {
       <div>
         <h1>Pokedex</h1>
       </div>
-      <PokemonsList pokemons={pokemons} loadMore={loadMore} />
+      <PokemonsList
+        pokemons={pokemons}
+        loadMore={loadMore}
+        preloader={preloader}
+      />
     </div>
   );
 }
