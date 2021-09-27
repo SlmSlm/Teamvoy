@@ -8,7 +8,7 @@ const SelectedPokCard = (props) => {
       <Card bg={"dark"} style={{ position: "fixed" }}>
         <Card.Img src={props.state.img} style={{ width: "150px" }} />
         <Card.Title>
-          {props.toUpper(props.state.name)} # {props.state.id}
+          {props.handleString(props.state.name)} # {props.state.id}
         </Card.Title>
         <Table striped bordered hover variant="dark">
           <tbody>
@@ -16,7 +16,9 @@ const SelectedPokCard = (props) => {
               <td>Type</td>
               <td>
                 {props.state.types.map((types) => (
-                  <div>{props.toUpper(types.type.name)}</div>
+                  <div style={{ "margin-bottom": "5px" }}>
+                    {props.handleString(types.type.name)}
+                  </div>
                 ))}
               </td>
             </tr>

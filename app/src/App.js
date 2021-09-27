@@ -2,8 +2,7 @@ import * as axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import PokemonsList from "./Components/PokemonsList";
-import Preloader from "./Components/Preloader/Preloader";
+import PokemonsList from "./Components/PokemonsList/PokemonsList";
 
 function App() {
   function loadMore() {
