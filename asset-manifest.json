@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Teamvoy/static/css/main.e0885785.chunk.css",
+    "main.js": "/Teamvoy/static/js/main.f4366e7c.chunk.js",
+    "main.js.map": "/Teamvoy/static/js/main.f4366e7c.chunk.js.map",
+    "runtime-main.js": "/Teamvoy/static/js/runtime-main.de651a48.js",
+    "runtime-main.js.map": "/Teamvoy/static/js/runtime-main.de651a48.js.map",
+    "static/css/2.94d102f3.chunk.css": "/Teamvoy/static/css/2.94d102f3.chunk.css",
+    "static/js/2.7634de0b.chunk.js": "/Teamvoy/static/js/2.7634de0b.chunk.js",
+    "static/js/2.7634de0b.chunk.js.map": "/Teamvoy/static/js/2.7634de0b.chunk.js.map",
+    "static/js/3.bcb244b1.chunk.js": "/Teamvoy/static/js/3.bcb244b1.chunk.js",
+    "static/js/3.bcb244b1.chunk.js.map": "/Teamvoy/static/js/3.bcb244b1.chunk.js.map",
+    "index.html": "/Teamvoy/index.html",
+    "static/css/2.94d102f3.chunk.css.map": "/Teamvoy/static/css/2.94d102f3.chunk.css.map",
+    "static/css/main.e0885785.chunk.css.map": "/Teamvoy/static/css/main.e0885785.chunk.css.map",
+    "static/js/2.7634de0b.chunk.js.LICENSE.txt": "/Teamvoy/static/js/2.7634de0b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.de651a48.js",
+    "static/css/2.94d102f3.chunk.css",
+    "static/js/2.7634de0b.chunk.js",
+    "static/css/main.e0885785.chunk.css",
+    "static/js/main.f4366e7c.chunk.js"
+  ]
+}
