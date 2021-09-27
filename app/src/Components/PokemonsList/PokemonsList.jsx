@@ -34,64 +34,95 @@ const PokemonsList = (props) => {
 
   const checkState = (state) =>
     Object.keys(state).length === 0 ? null : (
-      <SelectedPokCard state={selectedPokData} handleString={handleString} />
+      <SelectedPokCard
+        state={selectedPokData}
+        handleString={handleString}
+        sortByType={props.sortByType}
+      />
     );
 
   const handleString = (str) => {
     switch (str) {
       case "grass":
         return (
-          <span style={{ "background-color": "green", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "green", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "fire":
         return (
-          <span style={{ "background-color": "red", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "red", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "poison":
         return (
-          <span style={{ "background-color": "violet", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "violet", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "electric":
         return (
-          <span style={{ "background-color": "yellow", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "yellow", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "water":
         return (
-          <span style={{ "background-color": "blue", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "blue", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "bug":
         return (
-          <span style={{ "background-color": "brown", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "brown", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "flying":
         return (
-          <span style={{ "background-color": "#7FC7FF", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "#7FC7FF", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "fairy":
         return (
-          <span style={{ "background-color": "pink", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "pink", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       case "fighting":
         return (
-          <span style={{ "background-color": "#7FC7FF", padding: "3px" }}>
+          <Button
+            variant="outline-light"
+            style={{ backgroundColor: "#7FC7FF", padding: "3px" }}
+          >
             {str[0].toUpperCase() + str.slice(1) + " "}
-          </span>
+          </Button>
         );
       default:
         return str[0].toUpperCase() + str.slice(1) + " ";
@@ -102,7 +133,7 @@ const PokemonsList = (props) => {
     <div>
       <Container>
         <Row>
-          <Col>
+          <Col style={{ width: "30%" }}>
             {props.preloader ? (
               <Preloader />
             ) : (
@@ -124,7 +155,12 @@ const PokemonsList = (props) => {
                             />
                             <Card.Title>{handleString(p.name)}</Card.Title>
                             {p.types.map((types) => (
-                              <span className={styles.types}>
+                              <span
+                                className={styles.types}
+                                onClick={() =>
+                                  props.sortByType(types.type.name)
+                                }
+                              >
                                 {handleString(types.type.name)}
                               </span>
                             ))}

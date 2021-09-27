@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 const SelectedPokCard = (props) => {
   return (
     <div>
-      <Card bg={"dark"} style={{ position: "fixed" }}>
+      <Card bg={"dark"} style={{ position: "fixed", textAlign: "center" }}>
         <Card.Img src={props.state.img} style={{ width: "150px" }} />
         <Card.Title>
           {props.handleString(props.state.name)} # {props.state.id}
@@ -16,7 +16,10 @@ const SelectedPokCard = (props) => {
               <td>Type</td>
               <td>
                 {props.state.types.map((types) => (
-                  <div style={{ "margin-bottom": "5px" }}>
+                  <div
+                    style={{ marginBottom: "5px" }}
+                    onClick={() => props.sortByType(types.type.name)}
+                  >
                     {props.handleString(types.type.name)}
                   </div>
                 ))}

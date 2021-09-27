@@ -9,6 +9,30 @@ function App() {
     getPokemons();
   }
 
+  function sortByType(type) {
+    let sortedPokList = [];
+    for (let i = 0; i < pokemons.length; i++) {
+      let p = pokemons[i];
+      for (let j = 0; j < p.types.length; j++) {
+        let types = p.types[j];
+        if (Object.keys(p.types).length > 1) {
+          if (p.types[0].type.name === type || p.types[1].type.name === type) {
+            sortedPokList.unshift(p);
+            j++;
+          } else {
+            sortedPokList.push(p);
+            j++;
+          }
+        } else if (types.type.name === type) {
+          sortedPokList.unshift(p);
+        } else {
+          sortedPokList.push(p);
+        }
+      }
+    }
+    return setPokemons(sortedPokList);
+  }
+
   let [currentLimit, setLimit] = useState(12);
   const [pokemons, setPokemons] = useState([]);
   const [pokemonsId, setId] = useState([]);
@@ -42,12 +66,14 @@ function App() {
 
   return (
     <div>
-      <div>
+      <div style={{ textAlign: "center", margin: "20px" }}>
         <h1>Pokedex</h1>
+        <div>To sort, please click on the type of pokemon</div>
       </div>
       <PokemonsList
         pokemons={pokemons}
         loadMore={loadMore}
+        sortByType={sortByType}
         preloader={preloader}
       />
     </div>
